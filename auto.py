@@ -1,6 +1,8 @@
 import pyautogui as gui 
 import time 
 from sys import argv
+gui.FAILSAFE = False
+
 #use fullscreen
 #quality everthing low
 #my Screen  resolution  1366, 768
