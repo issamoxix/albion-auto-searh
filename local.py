@@ -58,7 +58,7 @@ with open('items2.json') as f:
 check = int(input(': '))
 man = int(input("From : "))
 tal = int(input("To : "))
-profiteKILLER = False
+
 # checkprofite functino is where take one argument wich is the items index in the items array 
 # it send request to the albion online project api and check for profite between the black and carleon market
 
@@ -101,7 +101,7 @@ def checkprofite(n):
                                 print('Carleon Market Price : ',int(cam['sell_price_min']),str(cam['sell_price_min_date']))
                                 print('PROFITE =====> ',int(profitePrice))
                                 playsound('./oof.mp3')
-                                exo = input('EXIT ?')
+                                exo = int(input('EXIT (type 0 to continue) : '))
                                 if exo !=0:
                                     sys.exit()
                     else:
@@ -110,8 +110,6 @@ def checkprofite(n):
                 continue
 if check ==1:
     for i in range(man,tal):
-        if profiteKILLER == True:
-            break
         if i >man:
             if list(data.values())[i] == list(data.values())[int(i)-1]:
                 print(i,list(data.values())[i])
