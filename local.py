@@ -97,8 +97,8 @@ def checkprofite(n):
                             if int(profitePrice) >= 10000:
                                 print('Item_id : ',market['item_id'])
                                 print('Quality : ',market['quality'])
-                                print('Black Market Price : ',int(market['buy_price_max']))
-                                print('Carleon Market Price : ',int(cam['sell_price_min']))
+                                print('Black Market Price : ',int(market['buy_price_max']),str(market['buy_price_max_date']))
+                                print('Carleon Market Price : ',int(cam['sell_price_min']),str(cam['sell_price_min_date']))
                                 print('PROFITE =====> ',int(profitePrice))
                                 playsound('./oof.mp3')
                                 exo = input('EXIT ?')
