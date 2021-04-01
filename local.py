@@ -95,7 +95,7 @@ def checkprofite(n):
                             profitePrice = int(market['buy_price_max']) - int(cam['sell_price_min']) -(int(market['buy_price_max'])*0.06)
                             # print('Buy Price : ',cam['sell_price_min'])
                             if int(profitePrice) >= 10000:
-                                print('Item_id : ',market['item_id'])
+                                print('Item_id : ',market['item_id'],f"[{list(data.value())[n]}]")
                                 print('Quality : ',market['quality'])
                                 print('Black Market Price : ',int(market['buy_price_max']),str(market['buy_price_max_date']))
                                 print('Carleon Market Price : ',int(cam['sell_price_min']),str(cam['sell_price_min_date']))
