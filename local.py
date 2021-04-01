@@ -59,7 +59,11 @@ check = int(input(': '))
 man = int(input("From : "))
 tal = int(input("To : "))
 profiteKILLER = False
+# checkprofite functino is where take one argument wich is the items index in the items array 
+# it send request to the albion online project api and check for profite between the black and carleon market
+
 def checkprofite(n):
+    print('Checking for profite')
     item_id = list(data.keys())[n]
     res  = req.get(f'https://www.albion-online-data.com/api/v2/stats/prices/{item_id}?locations=Black Market,Caerleon')
     datax = json.loads(res.text)
@@ -84,7 +88,7 @@ def checkprofite(n):
                 # print('Sell Price : ',market['buy_price_max'])
                 for cam in Cm:
                     if date in str(cam['sell_price_min_date']):
-                        print(market['buy_price_max_date'],cam['sell_price_min_date'])
+                        # print(market['buy_price_max_date'],cam['sell_price_min_date'])
                         if cam['quality'] == market['quality'] :
                             if int(cam['sell_price_min']) == 0:
                                 continue
@@ -110,13 +114,13 @@ if check ==1:
         if i >man:
             if list(data.values())[i] == list(data.values())[int(i)-1]:
                 print(i,list(data.values())[i])
-                # checkprofite(i)
+                checkprofite(i)
                 continue
         SearchName(list(data.values())[i])
         # url=f"http://40.71.20.48/?query={list(data.values())[i]}" 
         # res = req.get(url)
         print(i,list(data.values())[i])
-        # checkprofite(i)
+        checkprofite(i)
 
     # print(datax)
 
