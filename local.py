@@ -22,19 +22,23 @@ w,h = gui.size()
 name = get_corr(w,h,per_name[0],per_name[1])
 q = get_corr(w,h,per_q[0],per_q[1])
 en = get_corr(w,h,per_en[0],per_en[1])
+Buc= {
+
+}
 # Search the query function
-def SearchName(query):
+def SearchName(query,trade=False):
     # print('Moving ? ')
     gui.moveTo(name)
     gui.mouseDown()
     gui.mouseUp()
     gui.hotkey('ctrl', 'a')
     gui.write(query)
-    roll()
-def roll():
+    roll(trade)
+def roll(trade=False):
 
     
     for r in per_E:
+        
         gui.moveTo(en)
         gui.mouseDown()
         gui.mouseUp()
@@ -42,6 +46,9 @@ def roll():
         gui.mouseDown()
         gui.mouseUp()
         for i in per_Q:
+            if trade:
+                if per_E[int(Buc['E'])-1] == r and per_Q[int(Buc['q'])-1] == i:
+                    print('buy')
             gui.moveTo(q)
             gui.mouseDown()
             gui.mouseUp()
@@ -55,9 +62,9 @@ import json
 
 with open('items2.json') as f:
   data = json.load(f)
-check = int(input(': '))
-man = int(input("From : "))
-tal = int(input("To : "))
+# check = int(input(': '))
+# man = int(input("From : "))
+# tal = int(input("To : "))
 
 # checkprofite functino is where take one argument wich is the items index in the items array 
 # it send request to the albion online project api and check for profite between the black and carleon market
@@ -94,32 +101,43 @@ def checkprofite(n):
                                 continue
                             profitePrice = int(market['buy_price_max']) - int(cam['sell_price_min']) -(int(market['buy_price_max'])*0.06)
                             # print('Buy Price : ',cam['sell_price_min'])
-                            if int(profitePrice) >= 10000:
+                            if int(profitePrice) >= 500:
                                 print('Item_id : ',market['item_id'],f"[{data[market['item_id']]}]")
                                 print('Quality : ',market['quality'])
+                                if '@' in market['item_id']:
+                                    enen = market['item_id'].split('@')[1]
+                                else:
+                                    enen = 0
+                                print('En : ',enen)
                                 print('Black Market Price : ',int(market['buy_price_max']),str(market['buy_price_max_date']))
                                 print('Carleon Market Price : ',int(cam['sell_price_min']),str(cam['sell_price_min_date']))
                                 print('PROFITE =====> ',int(profitePrice))
+                                Buc = {
+                                    'itemID':data[market['item_id']],
+                                    'E':enen,
+                                    'q':market['quality']
+                                }
                                 playsound('./oof.mp3')
-                                exo = int(input('EXIT (type 0 to continue) : '))
-                                if exo !=0:
-                                    sys.exit()
+                                # exo = int(input('EXIT (type 0 to continue) : '))
+                                # if exo !=0:
+                                #     sys.exit()
+                                return 0
                     else:
                         continue
             else:
                 continue
-if check ==1:
-    for i in range(man,tal):
-        if i >man:
-            if list(data.values())[i] == list(data.values())[int(i)-1]:
-                print(i,list(data.values())[i])
-                checkprofite(i)
-                continue
-        SearchName(list(data.values())[i])
-        # url=f"http://40.71.20.48/?query={list(data.values())[i]}" 
-        # res = req.get(url)
-        print(i,list(data.values())[i])
-        checkprofite(i)
+# if check ==1:
+#     for i in range(man,tal):
+#         if i >man:
+#             if list(data.values())[i] == list(data.values())[int(i)-1]:
+#                 print(i,list(data.values())[i])
+#                 checkprofite(i)
+#                 continue
+#         SearchName(list(data.values())[i])
+#         # url=f"http://40.71.20.48/?query={list(data.values())[i]}" 
+#         # res = req.get(url)
+#         print(i,list(data.values())[i])
+#         checkprofite(i)
 
     # print(datax)
 
