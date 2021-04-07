@@ -102,8 +102,9 @@ def checkprofite(n):
                                 print('PROFITE =====> ',int(profitePrice))
                                 playsound('./oof.mp3')
                                 exo = input('EXIT ?')
-                                if exo !=0:
+                                if exo ==0:
                                     sys.exit()
+                                return 0
                     else:
                         continue
             else:
