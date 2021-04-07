@@ -61,7 +61,23 @@ tal = int(input("To : "))
 profiteKILLER = False
 # checkprofite functino is where take one argument wich is the items index in the items array 
 # it send request to the albion online project api and check for profite between the black and carleon market
+# function to add to JSON
+def saveLogs(Logs):
+   
+    def write_json(data, filename='./priceLogs.json'):
+        with open(filename,'w') as f:
+            json.dump(data, f, indent=4)
+        
+    # open file and read json
+    with open('./priceLogs.json') as json_file:
+        data = json.load(json_file)
 
+        temp = data['items']        
+    
+        # appending data to emp_details 
+        temp.append(Logs)
+        
+    write_json(data) 
 def checkprofite(n):
     print('Checking for profite')
     item_id = list(data.keys())[n]
@@ -101,6 +117,8 @@ def checkprofite(n):
                                 print('Carleon Market Price : ',int(cam['sell_price_min']),str(cam['sell_price_min_date']))
                                 print('PROFITE =====> ',int(profitePrice))
                                 playsound('./oof.mp3')
+                                Logs ={'id':n,'itemName':data[market['item_id']],'itemId':market['item_id'],'quality':market['quality'],'profite':int(profitePrice),'cmPrice':int(cam['sell_price_min']),'bmPrice':int(market['buy_price_max'])}
+                                saveLogs(Logs)
                                 exo = input('EXIT ?')
                                 if exo ==0:
                                     sys.exit()
